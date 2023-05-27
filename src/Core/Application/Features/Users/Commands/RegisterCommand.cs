@@ -53,8 +53,8 @@ namespace Application.Features.Users.Commands
                 user.EmailConfirmationCode = PasswordHelper.GenerateRandomString(20);
                 await _userRepository.AddAsync(user);
                 await _unitOfWork.SaveChangesAsync();
-                //string link = "http://localhost:8080/confirmemail/" + user.EmailConfirmationCode; if u use spa you must use this link example
-                string link = "http://localhost:5010/api/users/confirmemail/" + user.EmailConfirmationCode;
+                string link = "https://loginapitp.herokuapp.com/confirmemail/" + user.EmailConfirmationCode; //if u use spa you must use this link example
+                //string link = "http://localhost:5010/api/users/confirmemail/" + user.EmailConfirmationCode;
                 await _emailService.ConfirmationMailAsync(link, request.Email);
                 return new SuccessResponse(200, Messages.RegisterSuccessfully);
             }
