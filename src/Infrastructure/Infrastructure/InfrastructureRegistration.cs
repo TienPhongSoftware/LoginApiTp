@@ -15,6 +15,7 @@ namespace Infrastructure
             services.AddScoped<ITokenService, TokenService>();
             services.Configure<JWTSettings>(configuration.GetSection("JWTSettings"));
             services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
+            services.Configure<BaseUrlSettings>(configuration.GetSection("BaseUrl"));
             services.Configure<CacheSettings>(configuration.GetSection("CacheSettings"));
 
             var cacheSettings = configuration.GetSection("CacheSettings").Get<CacheSettings>();
