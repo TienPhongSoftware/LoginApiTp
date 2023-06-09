@@ -18,8 +18,15 @@ namespace WebAPI.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet("{username}")]
+        public async Task<IResponse> GetUsers(string username)
+        {
+            return await _mediator.Send(new GetUserByUserNameQuery(username));
+        }
+
+
         [Authorize(Roles ="Admin")]
-        [HttpGet]
+        [HttpGet("userswithroles")]
         public async Task<IResponse> GetAllUsersWithRoles()
         {
             return await _mediator.Send(new GetAllUsersWithRolesQuery());

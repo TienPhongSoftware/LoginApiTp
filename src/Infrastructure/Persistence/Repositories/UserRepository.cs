@@ -16,7 +16,7 @@ namespace Persistence.Repositories
         public UserRepository(CAContext context) : base(context)
         {
         }
-        
+
         public async Task<IEnumerable<UserDTO>> GetAllUsersWithRolesAsync()
         {
             return await _context.Users.AsNoTracking().Select(user => new UserDTO
@@ -40,12 +40,25 @@ namespace Persistence.Repositories
             return await _context.Users.AsNoTracking().Select(user => new UserDTO
             {
                 Id = user.Id,
-                UserName=user.UserName,
+                UserName = user.UserName,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
                 Roles = user.UserRoles.Select(ur => ur.Role.Name).ToList()
             }).FirstOrDefaultAsync(user => user.Id == userid);
+        }
+
+        public async Task<UserDTO> GetUserByUserNameAsync(string username)
+        {
+            return await _context.Users.AsNoTracking().Where(x=>x.UserName == username).Select(user => new UserDTO
+            {
+                Id = user.Id,
+                UserName = user.UserName,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Roles = user.UserRoles.Select(ur => ur.Role.Name).ToList()
+            }).FirstOrDefaultAsync();
         }
     }
 }

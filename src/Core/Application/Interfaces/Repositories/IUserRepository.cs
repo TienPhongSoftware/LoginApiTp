@@ -13,5 +13,6 @@ namespace Application.Interfaces.Repositories
         Task<UserDTO> GetUserWithRolesAsync(Guid userid);
         Task<IEnumerable<UserDTO>> GetAllUsersWithRolesAsync();
         Task<User> GetUserRolesByUserIdAsync(Guid userid);
+        Task<UserDTO> GetUserByUserNameAsync(string username);
     }
 }
