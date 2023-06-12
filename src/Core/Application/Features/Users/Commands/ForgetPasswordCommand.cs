@@ -38,7 +38,7 @@ namespace Application.Features.Users.Commands
                 }
                 user.ResetPasswordCode = PasswordHelper.GenerateRandomString(20);
                 await _unitOfWork.SaveChangesAsync();
-                string link = "/" + user.ResetPasswordCode + "/" + user.Email;
+                string link = "http://localhost:5010/api/users/resetpassword/" + user.ResetPasswordCode + "/" + user.Email;
                 await _emailService.ForgetPasswordMailAsync(link, user.Email);
                 return new SuccessResponse(200, Messages.IfEmailTrue);
             }

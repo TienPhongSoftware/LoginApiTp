@@ -55,7 +55,7 @@ namespace Application.Features.Users.Commands
                 user.EmailConfirmedCode = null;
                 user.EmailConfirmationCode = PasswordHelper.GenerateRandomString(20);
                 await _unitOfWork.SaveChangesAsync();
-                string link = "/" + user.EmailConfirmationCode;
+                string link = "http://localhost:5010/api/users/confirmemail/" + user.EmailConfirmationCode;
                 await _emailService.ConfirmationMailAsync(link, request.Email);
                 await _easyCacheService.RemoveByPrefixAsync("GetAuthenticatedUserWithRoles");
                 return new SuccessResponse(200, Messages.EmailSuccessfullyChangedConfirmYourEmail);

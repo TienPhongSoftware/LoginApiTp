@@ -15,7 +15,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://loginapitp.herokuapp.com",
+      "applicationUrl": "http://localhost:5010",
       "dotnetRunMessages": true
     },
     "IIS Express": {
