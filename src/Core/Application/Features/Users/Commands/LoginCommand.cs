@@ -68,8 +68,6 @@ namespace Application.Features.Users.Commands
                     refreshToken.Expiration = tokendto.RefreshTokenExpiration;
                     await _unitOfWork.SaveChangesAsync();
                 }
-                var userInfo = await _userRepository.GetUserByUserNameAsync(user.UserName);
-                if (userInfo != null) { tokendto.User = userInfo; }
                 return new DataResponse<TokenDTO>(tokendto, 200);
             }
         }
