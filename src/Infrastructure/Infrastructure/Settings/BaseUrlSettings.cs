@@ -8,7 +8,6 @@ namespace Infrastructure.Settings
 {
     public class BaseUrlSettings
     {
-        public string HomeUrl { get; set; }
         public string ThankUrl { get; set; }
         public string ForgetPasswordUrl { get; set; }
 
