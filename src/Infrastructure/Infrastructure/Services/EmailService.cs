@@ -14,17 +14,14 @@ namespace Infrastructure.Services
     public class EmailService : IEmailService
     {
         private readonly EmailSettings _emailSettings;
-        private readonly BaseUrlSettings _baseUrlSettings;
 
-        public EmailService(IOptions<EmailSettings> options, IOptions<BaseUrlSettings> optionsBaseUrl)
+        public EmailService(IOptions<EmailSettings> options)
         {
             _emailSettings = options.Value;
-            _baseUrlSettings = optionsBaseUrl.Value;
         }
 
         public async Task ConfirmationMailAsync(string link, string email)
         {
-            link = _baseUrlSettings.ConfirmedEmailUrl + link;
             var client = new SmtpClient(_emailSettings.Host, _emailSettings.Port)
             {
                 Credentials = new NetworkCredential(_emailSettings.Email, _emailSettings.Password),
@@ -43,7 +40,6 @@ namespace Infrastructure.Services
 
         public async Task ForgetPasswordMailAsync(string link, string email)
         {
-            link = _baseUrlSettings.ForgetPasswordUrl + link;
             var client = new SmtpClient(_emailSettings.Host, _emailSettings.Port)
             {
                 Credentials = new NetworkCredential(_emailSettings.Email, _emailSettings.Password),

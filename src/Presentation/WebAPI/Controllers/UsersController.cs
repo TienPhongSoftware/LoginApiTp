@@ -1,9 +1,11 @@
 ﻿using Application.Features.Users.Commands;
 using Application.Features.Users.Queries;
 using Application.Wrappers.Abstract;
+using Infrastructure.Settings;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 
 namespace WebAPI.Controllers
 {
@@ -12,10 +14,12 @@ namespace WebAPI.Controllers
     public class UsersController : BaseController
     {
         private readonly IMediator _mediator;
+        private readonly BaseUrlSettings _baseUrlSettings;
 
-        public UsersController(IMediator mediator)
+        public UsersController(IMediator mediator, IOptions<BaseUrlSettings> optionsBaseUrl)
         {
             _mediator = mediator;
+            _baseUrlSettings = optionsBaseUrl.Value;
         }
 
         [HttpGet("{username}")]
@@ -34,9 +38,11 @@ namespace WebAPI.Controllers
 
 
         [HttpGet("confirmemail/{code}")]
-        public async Task<IResponse> ConfirmEmail(string code)
+        public async Task<IActionResult> ConfirmEmail(string code)
         {
-            return await _mediator.Send(new ConfirmEmailCommand(code));
+            IResponse response = await _mediator.Send(new ConfirmEmailCommand(code));
+            if (response.Success == true) { return Redirect(_baseUrlSettings.ThankUrl); }
+            else return Redirect(_baseUrlSettings.ThankUrl);
         }
 
 

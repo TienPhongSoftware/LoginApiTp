@@ -54,7 +54,7 @@ namespace Application.Features.Users.Commands
                 await _userRepository.AddAsync(user);
                 await _unitOfWork.SaveChangesAsync();
                 //string link = "http://localhost:8080/confirmemail/" + user.EmailConfirmationCode; if u use spa you must use this link example
-                string link = "/" + user.EmailConfirmationCode;
+                string link = "https://loginapitp.herokuapp.com/api/users/confirmemail/" + user.EmailConfirmationCode;
                 await _emailService.ConfirmationMailAsync(link, request.Email);
                 return new SuccessResponse(200, Messages.RegisterSuccessfully);
             }
