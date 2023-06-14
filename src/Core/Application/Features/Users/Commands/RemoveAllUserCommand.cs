@@ -40,9 +40,12 @@ namespace Application.Features.Users.Commands
                 {
                     foreach (var user in users)
                     {
-                        _userRepository.Remove(user);
-                        await _unitOfWork.SaveChangesAsync();
-                        await _easyCacheService.RemoveByPrefixAsync("GetAuthenticatedUserWithRoles");
+                        if(user.Email != "defaultadmin@gmail.com")
+                        {
+                            _userRepository.Remove(user);
+                            await _unitOfWork.SaveChangesAsync();
+                            await _easyCacheService.RemoveByPrefixAsync("GetAuthenticatedUserWithRoles");
+                        }                        
                     }
                 }
                 return new SuccessResponse(200, Messages.DeletedSuccessfully);
