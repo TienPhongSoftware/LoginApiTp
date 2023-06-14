@@ -37,13 +37,13 @@ namespace WebAPI.Controllers
         }
 
 
-        //[HttpGet("confirmemail/{code}")]
-        //public async Task<IActionResult> ConfirmEmail(string code)
-        //{
-        //    IResponse response = await _mediator.Send(new ConfirmEmailCommand(code));
-        //    if (response.Success == true) { return Redirect(_baseUrlSettings.ThankUrl); }
-        //    else return Redirect(_baseUrlSettings.ThankUrl);
-        //}
+        [HttpGet("confirmemail/{code}")]
+        public async Task<IActionResult> ConfirmEmail(string code)
+        {
+            IResponse response = await _mediator.Send(new ConfirmEmailCommand(code));
+            if (response.Success == true) { return Redirect(_baseUrlSettings.ThankUrl); }
+            else return Redirect(_baseUrlSettings.ThankUrl);
+        }
 
 
         [Authorize(Roles = "Admin")]
