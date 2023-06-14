@@ -96,5 +96,10 @@ namespace WebAPI.Controllers
             return await _mediator.Send(new RemoveUserCommand(userid));
         }
 
+        [HttpDelete("allusers")]
+        public async Task<IResponse> DeleteAllUsers()
+        {
+            return await _mediator.Send(new RemoveAllUserCommand());
+        }
     }
 }
