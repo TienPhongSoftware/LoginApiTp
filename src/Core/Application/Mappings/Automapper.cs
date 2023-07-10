@@ -1,5 +1,7 @@
 ﻿using Application.Dtos;
+using Application.Features.Categories.Commands;
 using Application.Features.Roles.Commands;
+using Application.Features.Tools.Commands;
 using Application.Features.Users.Commands;
 using AutoMapper;
 using Domain.Entities;
@@ -20,6 +22,8 @@ namespace Application.Mappings
             CreateMap<User, RegisterCommand>().ReverseMap();
             CreateMap<Role, UpdateRoleCommand>().ReverseMap();
             CreateMap<Role, RoleDTO>().ReverseMap();
+            CreateMap<Category, AddNewCategoryCommand>().ReverseMap();
+            CreateMap<Tool, AddNewToolCommand>().ReverseMap();
         }
     }
 }

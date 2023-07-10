@@ -68,6 +68,7 @@ namespace Application.Features.Users.Commands
                     refreshToken.Expiration = tokendto.RefreshTokenExpiration;
                     await _unitOfWork.SaveChangesAsync();
                 }
+                tokendto.UserId = user.Id;
                 return new DataResponse<TokenDTO>(tokendto, 200);
             }
         }

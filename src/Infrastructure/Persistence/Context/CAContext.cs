@@ -26,5 +26,7 @@ namespace Persistence.Context
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Tool> Tools { get; set; }
     }
 }
